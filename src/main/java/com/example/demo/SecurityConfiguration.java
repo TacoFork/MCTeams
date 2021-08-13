@@ -18,6 +18,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/addTeam").hasRole("ADMIN")
+                .antMatchers("/viewTeams").hasRole("ADMIN")
+                .antMatchers("/updateTeam/**").hasRole("ADMIN")
+                .antMatchers("/deleteTeam/**").hasRole("ADMIN")
+                .antMatchers("/addPlayer").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/playerPage/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
@@ -25,10 +32,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/login?logout=true").permitAll();
 
-
-        //for accessing H2 for debugging purpose
-        httpSecurity.csrf().ignoringAntMatchers("/h2-console/**");
-        httpSecurity.headers().frameOptions().sameOrigin();
+        httpSecurity.csrf().disable();
+        httpSecurity.headers().frameOptions().disable();
     }
 
     @Bean

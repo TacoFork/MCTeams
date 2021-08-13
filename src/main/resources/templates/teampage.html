@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[${team.name}]]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/main.css}">
+    <style>
+        .btn{
+            float:right;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="base :: navbar"></div>
+<div class="container">
+    <span class="pageTitle">
+        <h2>[[${team.name}]]</h2>
+        <h4 class="text-muted">[[${team.city}]]</h4>
+    </span>
+    <h4 class="pageTitle">Roster</h4>
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <ul class="list-group" th:each="player : ${team.players}">
+                <li class="list-group-item">
+                    [[${player.firstName}]] [[${player.lastName}]]
+                    <a sec:authorize="isAuthenticated()" th:href="@{/playerPage/{id}(id=${player.id})}">
+                        <button type="button" class="btn btn-success btn-sm">View Details</button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

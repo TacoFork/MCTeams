@@ -1,0 +1,17 @@
+.pageTitle{
+    text-align: center;
+    padding: 2%;
+}
+
+.list-group{
+    text-align: center;
+}
+
+body {
+    background: url(https://img.wallpapersafari.com/desktop/1024/576/95/83/mwGcxr.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
